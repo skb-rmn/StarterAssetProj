@@ -1155,6 +1155,8 @@ GameObject:
   - component: {fileID: 7087646240458045981}
   - component: {fileID: 3608035038816324753}
   - component: {fileID: 1061741121184043233}
+  - component: {fileID: 7087646240458045983}
+  - component: {fileID: 7087646240458045982}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -3121,6 +3123,37 @@ MonoBehaviour:
     m_Bits: 0
   canPush: 0
   strength: 1.1
+--- !u!114 &7087646240458045982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061741121184043245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e80bbf60843e9c439258093fe431fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crouchHeight: 1
+  crouchCenter: {x: 0, y: 0.5, z: 0}
+  standingHeight: 1.8
+  standingCenter: {x: 0, y: 0.9, z: 0}
+  speedDampTime: 0.1
+--- !u!114 &7087646240458045983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061741121184043245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df38f91551874842b92afd1adfdf564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputActions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e,
+    type: 3}
 --- !u!4 &7287973423232479826
 Transform:
   m_ObjectHideFlags: 0
