@@ -24,6 +24,7 @@
 /[Aa]ssets/Plugins/Editor/JetBrains*
 /[Aa]ssets/Resources/[Ee]xternal/*
 
+/[Aa]ssets/Plugins/[Dd]emigiant/*
 # Visual Studio cache directory
 .vs/
 
