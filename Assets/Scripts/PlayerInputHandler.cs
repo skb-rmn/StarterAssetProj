@@ -10,12 +10,14 @@ public class PlayerInputHandler : MonoBehaviour
     // Input actions from the action map.
     private InputAction crouchAction;
     private InputAction moveAction;
+    private InputAction attackAction;
 
     // Expose the current crouch state.
     public bool IsCrouching { get; private set; } = false;
 
     // Event to notify subscribers when crouch state changes.
     public event Action<bool> OnCrouchChanged;
+    public event Action OnAttack;
 
     void Awake()
     {
@@ -23,9 +25,12 @@ public class PlayerInputHandler : MonoBehaviour
         var playerActionMap = inputActions.FindActionMap("Player", throwIfNotFound: true);
         crouchAction = playerActionMap.FindAction("Crouch", throwIfNotFound: true);
         moveAction = playerActionMap.FindAction("Move", throwIfNotFound: true);
+        attackAction = playerActionMap.FindAction("Attack", throwIfNotFound: true);
 
         // Subscribe to the performed event on the crouch action.
         crouchAction.performed += HandleCrouch;
+        attackAction.performed += HandleAttack;
+        
     }
 
     void OnEnable()
@@ -39,6 +44,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         // Unsubscribe and disable input actions.
         crouchAction.performed -= HandleCrouch;
+        attackAction.performed -= HandleAttack;
         crouchAction.Disable();
         moveAction.Disable();
     }
@@ -49,6 +55,12 @@ public class PlayerInputHandler : MonoBehaviour
         // Toggle crouch state.
         IsCrouching = !IsCrouching;
         OnCrouchChanged?.Invoke(IsCrouching);
+    }
+
+    private void HandleAttack(InputAction.CallbackContext context)
+    {
+        Debug.Log($"Attack Clicked - {context.phase}");
+        if (context.performed) OnAttack?.Invoke();
     }
 
     // (Optional) Expose a method for reading movement input.
