@@ -46,6 +46,9 @@ public class PlayerCombatDT : MonoBehaviour
         
     }
 
+    Collider[] colliders;
+    Collider bestCollider;
+
     void Update()
     {
         ReadInput();
@@ -53,26 +56,13 @@ public class PlayerCombatDT : MonoBehaviour
         DetectEnemy();
 
         if (debugMode)
-            DrawDebugRay();
-
-        // TODO: use _inputDirection for your combat aiming/attacks, rotation, etc.
-    }
-
-    RaycastHit hit;
-
-    void DetectEnemy()
-    {
-        Vector3 origin = transform.position + Vector3.up * debugHeight + _inputDirection * 0.5f;
-        if (Physics.Raycast(origin , _inputDirection, out hit, debugLength, layerMask))
         {
-            Debug.Log($"Hit - {hit.collider.name}");
-            //DebugExtension.DebugWireSphere(hit.collider.transform.position, debugWireSphere_Color, debugWireSphere_Radius);
-            if(hit.collider.transform.GetComponent<EnemyBasic>() != null)
+            //DrawDebugRay();
+            if(_inputDirection != Vector3.zero)
             {
-                Debug.Log("Enenmy");
                 DebugShapes.DebugDrawSphere
                 (
-                    center: hit.collider.transform.position,
+                    center: bestCollider?.transform.position ?? colliders[0].transform.position,
                     radius: debugWireSphere_Radius,
                     color: debugColor,
                     duration: 0f,
@@ -80,7 +70,43 @@ public class PlayerCombatDT : MonoBehaviour
                     segments: 36
                 );
             }
+
         }
+
+        // TODO: use _inputDirection for your combat aiming/attacks, rotation, etc.
+    }
+
+    RaycastHit hit;
+    public ConeDetector coneDetector;
+
+    void DetectEnemy()
+    {
+        if(_inputDirection == Vector3.zero)
+        {
+            return;
+        }
+        colliders = coneDetector.GetTargetsInCone();
+        bestCollider = coneDetector.GetBestTargetInRange();
+        
+        //Vector3 origin = transform.position + Vector3.up * debugHeight + _inputDirection * 0.5f;
+        //if (Physics.Raycast(origin , _inputDirection, out hit, debugLength, layerMask))
+        //{
+        //    Debug.Log($"Hit - {hit.collider.name}");
+        //    //DebugExtension.DebugWireSphere(hit.collider.transform.position, debugWireSphere_Color, debugWireSphere_Radius);
+        //    if(hit.collider.transform.GetComponent<EnemyBasic>() != null)
+        //    {
+        //        Debug.Log("Enenmy");
+        //        DebugShapes.DebugDrawSphere
+        //        (
+        //            center: hit.collider.transform.position,
+        //            radius: debugWireSphere_Radius,
+        //            color: debugColor,
+        //            duration: 0f,
+        //            depthTest: true,
+        //            segments: 36
+        //        );
+        //    }
+        //}
     }
 
     /// <summary>
