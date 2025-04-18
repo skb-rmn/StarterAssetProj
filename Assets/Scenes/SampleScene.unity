@@ -4450,6 +4450,8 @@ MonoBehaviour:
   debugLength: 10
   debugHeight: 1
   debugColor: {r: 0.98929596, g: 0, b: 1, a: 1}
+  moveOffsetFactor: 0.5
+  combatMoveDuration: 0.7
   coneDetector: {fileID: 7087646240458045985}
   debugWireSphere_Color: {r: 0.8773585, g: 0.8411187, b: 0.062077243, a: 0}
   debugWireSphere_Radius: 0.2
@@ -4466,7 +4468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41197981a820ee408f6ecfe59262276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
+  range: 15
   angle: 120
   layerMask:
     serializedVersion: 2

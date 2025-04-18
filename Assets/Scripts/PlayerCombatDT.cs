@@ -1,4 +1,6 @@
-﻿using StarterAssets;
+﻿using DG.Tweening;
+using StarterAssets;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -43,7 +45,33 @@ public class PlayerCombatDT : MonoBehaviour
     }
     private void Awake()
     {
-        
+        if(inputActions != null)
+        {
+            inputActions.OnAttack += HandleAttack;
+        }
+    }
+    private void OnDestroy()
+    {
+        if(inputActions != null)
+        {
+            inputActions.OnAttack -= HandleAttack;
+        }
+    }
+
+    public float moveOffsetFactor = 0.5f;
+    public float combatMoveDuration = 0.7f;
+    private void HandleAttack()
+    {
+        //all move of
+        //only rotata
+        if (bestCollider)
+        {
+            transform.DOMove(bestCollider.transform.position - _inputDirection * moveOffsetFactor, combatMoveDuration);
+        }
+        else if (colliders.Length > 0)
+        {
+            transform.DOMove(colliders[0].transform.position - _inputDirection * moveOffsetFactor, combatMoveDuration);
+        }
     }
 
     Collider[] colliders;
