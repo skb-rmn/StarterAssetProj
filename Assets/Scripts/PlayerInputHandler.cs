@@ -12,6 +12,9 @@ public class PlayerInputHandler : MonoBehaviour
     private InputAction moveAction;
     private InputAction attackAction;
 
+    public InputAction MoveAction => moveAction;
+    public InputAction AttackAction => attackAction;
+
     // Expose the current crouch state.
     public bool IsCrouching { get; private set; } = false;
 
@@ -59,7 +62,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void HandleAttack(InputAction.CallbackContext context)
     {
-        Debug.Log($"Attack Clicked - {context.phase}");
+        //Debug.Log($"Attack Clicked - {context.phase}");
         if (context.performed) OnAttack?.Invoke();
     }
 
