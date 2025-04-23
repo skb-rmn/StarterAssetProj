@@ -312,8 +312,8 @@ public class PlayerCombatDT : MonoBehaviour
         {
             return;
         }
-        colliders = coneDetector.GetTargetsInCone();
-        bestCollider = coneDetector.GetBestTargetInRange();
+        //colliders = coneDetector.GetTargetsInCone();
+        //bestCollider = coneDetector.GetBestTargetInRange();
         
         //Vector3 origin = transform.position + Vector3.up * debugHeight + _inputDirection * 0.5f;
         //if (Physics.Raycast(origin , _inputDirection, out hit, debugLength, layerMask))

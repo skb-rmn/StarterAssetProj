@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class EnemyBasic : MonoBehaviour, IDamageable
 {
+    public bool IsHit => isHit;
+    bool isHit = false;
+    Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     public void TakeDamage(int amount, Vector3 hitPoint)
     {
-        //throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();\
+        if(!isHit)
+        {
+            animator.SetTrigger("Hit");
+        }
     }
 
     // Start is called before the first frame update
@@ -19,5 +31,14 @@ public class EnemyBasic : MonoBehaviour, IDamageable
     void Update()
     {
         
+    }
+
+    public void OnHitTakenEvent()
+    {
+        isHit = true;
+    }
+    public void OnHitEndEvent()
+    {
+        isHit =false;
     }
 }

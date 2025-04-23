@@ -14,10 +14,10 @@ public class ConeDetector : MonoBehaviour
     /// <summary>
     /// Returns all colliders within the cone, sorted by ascending distance.
     /// </summary>
-    public Collider[] GetTargetsInCone()
+    public Collider[] GetTargetsInCone(Vector3 fwd)
     {
         Vector3 origin = transform.position;
-        Vector3 forward = transform.forward;
+        Vector3 forward = fwd != Vector3.zero? fwd : transform.forward;
         float halfAngle = angle * 0.5f;
 
         // 1) Broad phase: sphere overlap
@@ -37,10 +37,10 @@ public class ConeDetector : MonoBehaviour
     ///   breaking ties by closest distance.
     /// - Otherwise, picks the collider with the smallest angle to forward.
     /// </summary>
-    public Collider GetBestTargetInRange()
+    public Collider GetBestTargetInRange(Vector3 fwd)
     {
         Vector3 origin = transform.position;
-        Vector3 forward = transform.forward;
+        Vector3 forward = fwd != Vector3.zero? fwd : transform.forward;
         float halfAngle = angle * 0.5f;
 
         // Broad-phase: gather all colliders within range
@@ -94,7 +94,7 @@ public class ConeDetector : MonoBehaviour
         Gizmos.DrawLine(origin, origin + rightRot * forward * range);
 
         // Highlight best target
-        Collider best = GetBestTargetInRange();
+        Collider best = GetBestTargetInRange(forward);
         if (best != null)
         {
             Gizmos.color = Color.magenta;
